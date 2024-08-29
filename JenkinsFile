@@ -1,0 +1,61 @@
+pipeline {
+    agent any
+
+    environment {
+        JAVA_HOME = "/Users/bhupendrasam1404/Library/Java/JavaVirtualMachines/jdk-22.0.1.jdk/Contents/Home"
+        DOCKER_IMAGE = "bhupendra1404/microservice:ms-product-service"
+        CONTAINER_NAME = "ms-product-service"
+        DOCKER_PATH = '/usr/local/bin/docker'
+        MAVEN_PATH = '/opt/homebrew/Cellar/maven/3.9.5/libexec/bin/mvn'
+        CUSTOM_SERVER_IP = '192.168.29.226'
+    }
+
+    stages {
+
+        stage('Checkout') {
+            steps {
+                git branch: 'main', url: 'https://github.com/bhupendrasambare/microservices-product-service.git'
+            }
+        }
+
+        stage('Build JAR') {
+            steps {
+                sh "${MAVEN_PATH} clean package -DskipTests"
+            }
+        }
+
+        stage('Build Docker Image') {
+            steps {
+                script {
+                    sh "${DOCKER_PATH} build --no-cache -t ${DOCKER_IMAGE} ."
+                }
+            }
+        }
+
+        stage('Deploy Docker Image') {
+            steps {
+                script {
+                    sh """
+                    if [ \$(${DOCKER_PATH} ps -a -q -f name=${CONTAINER_NAME}) ]; then
+                        ${DOCKER_PATH} stop ${CONTAINER_NAME}
+                        ${DOCKER_PATH} rm ${CONTAINER_NAME}
+                    fi
+                    """
+
+                    sh """
+                    ${DOCKER_PATH} run -i -p 9002:9002 -d --name ${CONTAINER_NAME} -e CUSTOM_SERVER_IP=${CUSTOM_SERVER_IP} ${DOCKER_IMAGE}
+                    """
+                }
+            }
+        }
+
+        stage('Clean Up Docker Images') {
+            steps {
+                script {
+                    // Remove all dangling images
+                    sh "${DOCKER_PATH} image prune -f"
+                }
+            }
+        }
+    }
+}
