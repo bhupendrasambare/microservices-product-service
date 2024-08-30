@@ -39,4 +39,8 @@ public class Response {
         this.message = message;
     }
 
+    public Response(String message, Object data) {
+        this.message = message;
+        this.data = data;
+    }
 }
