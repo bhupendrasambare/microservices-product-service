@@ -54,7 +54,7 @@ public class AuthConfig {
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         return http.csrf(AbstractHttpConfigurer::disable)
                 .authorizeHttpRequests( req->
-                        req.requestMatchers("/product/public/**","/actuator","/actuator/**")
+                        req.requestMatchers("/product/public/**","/actuator","/actuator/**","/swagger-ui/**","/v3/api-docs/**")
                                 .permitAll().anyRequest().authenticated()
                         )
                 .sessionManagement(
