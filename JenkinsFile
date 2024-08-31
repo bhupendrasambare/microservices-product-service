@@ -8,7 +8,7 @@ pipeline {
         DOCKER_PATH = '/usr/local/bin/docker'
         MAVEN_PATH = '/opt/homebrew/Cellar/maven/3.9.5/libexec/bin/mvn'
         CUSTOM_SERVER_IP = '192.168.29.226'
-        STORAGE_LOCATION = '/path/on/host/images' // Update this path to your desired storage location on the host
+        STORAGE_LOCATION = '/Users/bhupendrasam1404/Project/Microservices/storage' // Update this path to your desired storage location on the host
     }
 
     stages {
@@ -43,11 +43,12 @@ pipeline {
                     fi
                     """
 
+                    // Mount STORAGE_LOCATION to /external-images inside the container
                     sh """
                     ${DOCKER_PATH} run -i -p 9002:9002 -d \
                     --name ${CONTAINER_NAME} \
                     -e CUSTOM_SERVER_IP=${CUSTOM_SERVER_IP} \
-                    -v ${STORAGE_LOCATION}:/external-images \ // Mount STORAGE_LOCATION to /external-images inside the container
+                    -v ${STORAGE_LOCATION}:/external-images \
                     ${DOCKER_IMAGE}
                     """
                 }
