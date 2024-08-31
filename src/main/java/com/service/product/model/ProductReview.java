@@ -30,16 +30,22 @@ public class ProductReview {
     @Column(nullable = false)
     private Long customerId;
 
+    @Column(nullable = false,name = "customer_user_name")
+    private String customerUserName;
+
+    @Column(nullable = false,name = "customer_full_name")
+    private String customerFullName;
+
     @Column(nullable = false)
     private Integer rating;
 
     @Column(columnDefinition = "TEXT")
     private String review;
 
-    @Column(nullable = false, updatable = false)
+    @Column(nullable = false, updatable = false,name = "created_at")
     private LocalDateTime createdAt;
 
-    @Column(nullable = false)
+    @Column(nullable = false,name = "updated_at")
     private LocalDateTime updatedAt;
 
     @PrePersist

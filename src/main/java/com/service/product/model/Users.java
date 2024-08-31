@@ -52,6 +52,5 @@ public class Users {
         this.firstName = request.getFirstName();
         this.lastName = request.getLastName();
         this.email = request.getEmail();
-        this.password= request.getPassword();
     }
 }

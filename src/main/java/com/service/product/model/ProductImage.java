@@ -28,13 +28,13 @@ public class ProductImage {
     @JoinColumn(name = "product_id", nullable = false)
     private Product product;
 
-    @Column(nullable = false, length = 255)
+    @Column(nullable = false, length = 255,name = "image_url")
     private String imageUrl;
 
-    @Column(nullable = false)
+    @Column(nullable = false,name = "is_primary")
     private Boolean isPrimary;
 
-    @Column(nullable = false, updatable = false)
+    @Column(nullable = false, updatable = false,name = "created_at")
     private LocalDateTime createdAt;
 
     @PrePersist

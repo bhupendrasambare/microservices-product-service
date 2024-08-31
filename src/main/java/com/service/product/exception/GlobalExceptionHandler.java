@@ -32,19 +32,19 @@ public class GlobalExceptionHandler {
 
     @ExceptionHandler(UsernameNotFoundException.class)
     public ResponseEntity<?> handleUserNotFoundException(UsernameNotFoundException ex, WebRequest request) {
-        Response response = new Response(Constants.USER_NOT_FOUND_CODE,Constants.USER_NOT_FOUND, Status.FAILED,null);
+        Response response = new Response(Status.FAILED,Constants.USER_NOT_FOUND_CODE,Constants.USER_NOT_FOUND, null);
         return new ResponseEntity<>(response, HttpStatus.NOT_FOUND);
     }
 
     @ExceptionHandler(InvalidCredentialsException.class)
     public ResponseEntity<?> handleInvalidCredentialsException(InvalidCredentialsException ex, WebRequest request) {
-        Response response = new Response(Constants.INVALID_PASSWORD_CODE,Constants.INVALID_PASSWORD, Status.FAILED,null);
+        Response response = new Response(Status.FAILED,Constants.INVALID_PASSWORD_CODE,Constants.INVALID_PASSWORD,null);
         return new ResponseEntity<>(response, HttpStatus.UNAUTHORIZED);
     }
 
     @ExceptionHandler(BadCredentialsException.class)
     public ResponseEntity<?> badCredentialsException(BadCredentialsException ex, WebRequest request) {
-        Response response = new Response(Constants.INVALID_PASSWORD_CODE,Constants.INVALID_PASSWORD, Status.FAILED,null);
+        Response response = new Response(Status.FAILED,Constants.INVALID_PASSWORD_CODE,Constants.INVALID_PASSWORD,null);
         return new ResponseEntity<>(response, HttpStatus.UNAUTHORIZED);
     }
 
