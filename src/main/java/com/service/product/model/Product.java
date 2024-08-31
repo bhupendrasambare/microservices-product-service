@@ -36,7 +36,7 @@ public class Product {
     @Column(nullable = false)
     private Double price;
 
-    @Column
+    @Column(name = "discount_price")
     private Double discountPrice;
 
     @Column(nullable = false)
@@ -46,11 +46,15 @@ public class Product {
     @Column(nullable = false, length = 20)
     private ProductStatus status;
 
-    @Column(nullable = false, updatable = false)
+    @Column(nullable = false, updatable = false,name = "created_at")
     private LocalDateTime createdAt;
 
-    @Column(nullable = false)
+    @Column(nullable = false,name = "updated_at")
     private LocalDateTime updatedAt;
+
+    @ManyToOne
+    @JoinColumn(name = "created_by")
+    private Users createdBy;
 
     @PrePersist
     protected void onCreate() {

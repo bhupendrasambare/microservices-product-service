@@ -2,7 +2,8 @@ server:
   port: 9002
 
 custom:
-  server-ip: localhost
+  server-ip: "localhost"
+  local-storage: "/Users/bhupendrasam1404/Project/Microservices/storage"
 
 spring:
   config:

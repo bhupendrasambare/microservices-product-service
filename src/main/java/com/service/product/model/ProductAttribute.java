@@ -23,18 +23,20 @@ public class ProductAttribute {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "product_id", nullable = false)
-    private Product product;
+    @Column(name = "product_id", nullable = false)
+    private Long productId;
 
-    @Column(nullable = false, length = 255)
+    @Column(nullable = false, length = 255,name = "attribute_name")
     private String attributeName;
 
-    @Column(nullable = false, length = 255)
+    @Column(nullable = false, length = 255,name = "attribute_value")
     private String attributeValue;
 
-    @Column(nullable = false, updatable = false)
+    @Column(nullable = false, updatable = false,name = "created_at")
     private LocalDateTime createdAt;
+
+    @Column(name = "created_by", nullable = false)
+    private Integer createdBy;
 
     @PrePersist
     protected void onCreate() {

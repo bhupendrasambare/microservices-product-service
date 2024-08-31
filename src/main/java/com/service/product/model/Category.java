@@ -29,10 +29,10 @@ public class Category {
     @Column(columnDefinition = "TEXT")
     private String description;
 
-    @Column(nullable = false, updatable = false)
+    @Column(nullable = false, updatable = false,name = "created_at")
     private LocalDateTime createdAt;
 
-    @Column(nullable = false)
+    @Column(nullable = false,name = "updated_at")
     private LocalDateTime updatedAt;
 
     @PrePersist

@@ -18,9 +18,9 @@ import lombok.Setter;
 @AllArgsConstructor
 @NoArgsConstructor
 public class Response {
+    private Status status = Status.SUCCESS;
     private String code = Constants.SUCCESS_CODE;
     private String message = Constants.SUCCESS;
-    private Status status = Status.SUCCESS;
     private Object data;
 
     public Response(Exception e){
