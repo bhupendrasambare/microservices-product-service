@@ -27,11 +27,14 @@ public class ProductReview {
     @JoinColumn(name = "product_id", nullable = false)
     private Product product;
 
-    @Column(nullable = false)
+    @Column(nullable = false,name = "customer_id")
     private Long customerId;
 
     @Column(nullable = false,name = "customer_user_name")
     private String customerUserName;
+
+    @Column(nullable = false,name = "customer_image")
+    private String customerImage;
 
     @Column(nullable = false,name = "customer_full_name")
     private String customerFullName;

@@ -268,7 +268,7 @@ public class ProductService {
 
             List<ProductReviewDTO> reviews = productReviewRepository.findByProductId(product.getId())
                     .stream()
-                    .map(review -> new ProductReviewDTO(review.getId(), review.getCustomerFullName(), review.getReview(), review.getRating()))
+                    .map(review -> new ProductReviewDTO(review.getId(), review.getCustomerFullName(),review.getCustomerImage(), review.getReview(), review.getRating(),review.getCreatedAt()))
                     .collect(Collectors.toList());
 
             List<ProductAttributeDto> attributes = productAttributeRepository.findByProductId(product.getId())
@@ -293,7 +293,7 @@ public class ProductService {
 
             List<ProductReviewDTO> reviews = productReviewRepository.findByProductId(product.getId())
                     .stream()
-                    .map(review -> new ProductReviewDTO(review.getId(), review.getCustomerFullName(), review.getReview(), review.getRating()))
+                    .map(review -> new ProductReviewDTO(review.getId(), review.getCustomerFullName(),review.getCustomerImage(), review.getReview(), review.getRating(),review.getCreatedAt()))
                     .collect(Collectors.toList());
 
             List<ProductAttributeDto> attributes = productAttributeRepository.findByProductId(product.getId())
