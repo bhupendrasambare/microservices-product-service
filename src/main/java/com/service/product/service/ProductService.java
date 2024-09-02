@@ -301,7 +301,7 @@ public class ProductService {
                     .map(review -> new ProductAttributeDto(review.getId(), review.getAttributeName(), review.getAttributeValue()))
                     .collect(Collectors.toList());
             responseDTO = new ProductResponseDTO(product, images, reviews,attributes);
-            return ResponseEntity.ok(new Response(Constants.PRODUCT_FETCH_SUCCESSFULLY, responseDTO));
+            return ResponseEntity.ok(responseDTO);
         }else{
             return new ResponseEntity<Response>(new Response(Status.FAILED,Constants.PRODUCT_NOT_FOUND_CODE,Constants.PRODUCT_NOT_FOUND),HttpStatus.NOT_FOUND);
         }
