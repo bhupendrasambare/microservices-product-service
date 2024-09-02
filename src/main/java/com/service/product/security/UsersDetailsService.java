@@ -4,11 +4,11 @@
  * Time   :5:01 pm
  * Project:microservices-registry
  **/
-package com.service.product.config;
+package com.service.product.security;
 
-import com.service.product.repository.UsersRepository;
 import com.service.product.dto.CustomUserDetails;
 import com.service.product.model.Users;
+import com.service.product.repository.UsersRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
