@@ -9,6 +9,7 @@ package com.service.product.controller;
 import com.service.product.dto.request.ProductFilterRequest;
 import com.service.product.dto.response.ProductResponseDTO;
 import com.service.product.dto.response.Response;
+import com.service.product.service.CategoryService;
 import com.service.product.service.ProductService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
@@ -24,6 +25,9 @@ public class PublicController {
     @Autowired
     private ProductService productService;
 
+    @Autowired
+    private CategoryService categoryService;
+
     @Operation(summary = "Fetch products based on filters", description = "Fetches products with optional filters: name, price range, category ID, and availability.")
     @PostMapping("/search")
     public ResponseEntity<Response> fetchProducts(@RequestBody ProductFilterRequest filterRequest) {
@@ -34,6 +38,12 @@ public class PublicController {
     @GetMapping("/product/{id}")
     public ResponseEntity<?> getProduct(@PathVariable(name = "id") Long id) {
         return productService.findById(id);
+    }
+
+    @Operation(summary = "Get all categories", description = "Fetches all categories.")
+    @GetMapping("/category/get")
+    public ResponseEntity<Response> getAllCategories() {
+        return categoryService.getAllCategories();
     }
 
 }
