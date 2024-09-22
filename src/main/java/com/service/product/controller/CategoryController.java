@@ -35,12 +35,6 @@ public class CategoryController {
         return categoryService.createCategory(categoryRequest);
     }
 
-    @Operation(summary = "Get all categories", description = "Fetches all categories.")
-    @GetMapping
-    public ResponseEntity<Response> getAllCategories() {
-        return categoryService.getAllCategories();
-    }
-
     @Operation(summary = "Update a category", description = "Updates an existing category by its ID.")
     @PutMapping("/{id}")
     public ResponseEntity<Response> updateCategory(@PathVariable Long id, @Valid @RequestBody CategoryRequest categoryRequest) {

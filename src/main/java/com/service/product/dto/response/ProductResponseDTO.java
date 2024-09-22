@@ -7,6 +7,7 @@
 package com.service.product.dto.response;
 
 import com.service.product.dto.dto.ProductAttributeDto;
+import com.service.product.dto.dto.ProductCategoryDto;
 import com.service.product.dto.dto.ProductImageDTO;
 import com.service.product.dto.dto.ProductReviewDTO;
 import com.service.product.model.Product;
@@ -25,4 +26,5 @@ public class ProductResponseDTO {
     private List<ProductImageDTO> productImages;
     private List<ProductReviewDTO> productReviews;
     private List<ProductAttributeDto> productAttributes;
+    private List<ProductCategoryDto> categories;
 }
