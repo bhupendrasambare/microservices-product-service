@@ -37,8 +37,7 @@ public record ProductRequest(
         @PositiveOrZero(message = "Quantity must be zero or positive")
         Integer quantity,
 
-        @NotBlank(message = "Status is mandatory")
-        @Size(max = 20, message = "Status must be less than 20 characters")
+        @NotNull(message = "status is required")
         ProductStatus status,
 
         @NotNull(message = "Category IDs are mandatory")

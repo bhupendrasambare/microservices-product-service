@@ -37,8 +37,14 @@ public class ProductController {
     @Autowired
     private ProductService productService;
 
+    @Operation(summary = "Fetch products based on login user", description = "Fetches products with Product Id")
+    @GetMapping("/get")
+    public ResponseEntity<?> getProduct() {
+        return productService.findAll();
+    }
+
     @Operation(summary = "Create a new product", description = "Creates a new product with associated categories.")
-    @PostMapping
+    @PostMapping("/add")
     public ResponseEntity<Response> createProduct(@Valid @RequestBody ProductRequest productRequest) {
         return productService.createProduct(productRequest);
     }

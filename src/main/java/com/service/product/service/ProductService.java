@@ -11,6 +11,7 @@ import com.service.product.config.Utility;
 import com.service.product.controller.FileController;
 import com.service.product.dto.Status;
 import com.service.product.dto.dto.ProductAttributeDto;
+import com.service.product.dto.dto.ProductCategoryDto;
 import com.service.product.dto.dto.ProductImageDTO;
 import com.service.product.dto.dto.ProductReviewDTO;
 import com.service.product.dto.enums.ProductStatus;
@@ -276,7 +277,12 @@ public class ProductService {
                     .map(review -> new ProductAttributeDto(review.getId(), review.getAttributeName(), review.getAttributeValue()))
                     .collect(Collectors.toList());
 
-            return new ProductResponseDTO(product, images, reviews,attributes);
+            List<ProductCategoryDto> categories = productCategoryRepository.findCategoryByProductId(product.getId())
+                    .stream()
+                    .map(category -> new ProductCategoryDto(category.getId(), category.getName(), category.getDescription()))
+                    .toList();
+
+            return new ProductResponseDTO(product, images, reviews,attributes,categories);
         }).collect(Collectors.toList());
 
         return ResponseEntity.ok(new Response(Constants.PRODUCTS_FETCH_SUCCESSFULLY, productResponses));
@@ -300,10 +306,47 @@ public class ProductService {
                     .stream()
                     .map(review -> new ProductAttributeDto(review.getId(), review.getAttributeName(), review.getAttributeValue()))
                     .collect(Collectors.toList());
-            responseDTO = new ProductResponseDTO(product, images, reviews,attributes);
+
+            List<ProductCategoryDto> categories = productCategoryRepository.findCategoryByProductId(product.getId())
+                    .stream()
+                    .map(category -> new ProductCategoryDto(category.getId(), category.getName(), category.getDescription()))
+                    .toList();
+
+            responseDTO = new ProductResponseDTO(product, images, reviews,attributes,categories);
             return ResponseEntity.ok(responseDTO);
         }else{
             return new ResponseEntity<Response>(new Response(Status.FAILED,Constants.PRODUCT_NOT_FOUND_CODE,Constants.PRODUCT_NOT_FOUND),HttpStatus.NOT_FOUND);
         }
+    }
+
+    public ResponseEntity<?> findAll() {
+        Utility utility = new Utility();
+        List<Product> products = productRepository.findByCreatedBy(utility.getCurrentUsername());
+
+        List<ProductResponseDTO> productResponses = products.stream().map(product -> {
+            List<ProductImageDTO> images = productImageRepository.findByProductId(product.getId())
+                    .stream()
+                    .map(image -> new ProductImageDTO(image.getId(), image.getImageUrl(), image.getIsPrimary()))
+                    .collect(Collectors.toList());
+
+            List<ProductReviewDTO> reviews = productReviewRepository.findByProductId(product.getId())
+                    .stream()
+                    .map(review -> new ProductReviewDTO(review.getId(), review.getCustomerFullName(),review.getCustomerImage(), review.getReview(), review.getRating(),review.getCreatedAt()))
+                    .collect(Collectors.toList());
+
+            List<ProductAttributeDto> attributes = productAttributeRepository.findByProductId(product.getId())
+                    .stream()
+                    .map(review -> new ProductAttributeDto(review.getId(), review.getAttributeName(), review.getAttributeValue()))
+                    .collect(Collectors.toList());
+
+            List<ProductCategoryDto> categories = productCategoryRepository.findCategoryByProductId(product.getId())
+                    .stream()
+                    .map(category -> new ProductCategoryDto(category.getId(), category.getName(), category.getDescription()))
+                    .toList();
+
+            return new ProductResponseDTO(product, images, reviews,attributes,categories);
+        }).collect(Collectors.toList());
+
+        return ResponseEntity.ok(new Response(Constants.PRODUCTS_FETCH_SUCCESSFULLY, productResponses));
     }
 }
