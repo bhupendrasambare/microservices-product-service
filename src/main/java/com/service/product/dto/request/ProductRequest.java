@@ -16,10 +16,9 @@ import java.util.List;
 
 public record ProductRequest(
         @NotBlank(message = "Name is mandatory")
-        @Size(max = 100, message = "Name must be less than 100 characters")
+        @Size(max = 225, message = "Name must be less than 100 characters")
         String name,
 
-        @Size(max = 1000, message = "Description must be less than 1000 characters")
         String description,
 
         @NotBlank(message = "SKU is mandatory")

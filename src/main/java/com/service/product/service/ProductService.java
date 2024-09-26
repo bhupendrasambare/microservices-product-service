@@ -105,7 +105,7 @@ public class ProductService {
             try{
                 Utility utility = new Utility();
                 Users users = usersRepository.findByEmail(utility.getCurrentUsername()).orElse(null);
-                if(users!=null && optionalProduct.getCreatedBy()!=null && optionalProduct.getCreatedBy().getId() != users.getId()){
+                if(users!=null && optionalProduct.getCreatedBy()!=null && optionalProduct.getCreatedBy().getId() == users.getId()){
                     ProductImage productImage = new ProductImage();
                     productImage.setProduct(optionalProduct);
                     productImage.setCreatedAt(LocalDateTime.now());
@@ -135,7 +135,7 @@ public class ProductService {
         }else{
             Utility utility = new Utility();
             Users users = usersRepository.findByEmail(utility.getCurrentUsername()).orElse(null);
-            if(users!=null && optionalProduct.getCreatedBy()!=null && optionalProduct.getCreatedBy().getId() != users.getId()){
+            if(users!=null && optionalProduct.getCreatedBy()!=null && optionalProduct.getCreatedBy().getId() == users.getId()){
                 Category category = categoryRepository.findById(categoryId).orElse(null);
                 if(category!=null){
                     ProductCategory productCategory = new ProductCategory(null,optionalProduct,category);
@@ -178,7 +178,7 @@ public class ProductService {
         }
         Utility utility = new Utility();
         Users users = usersRepository.findByEmail(utility.getCurrentUsername()).orElse(null);
-        if(users!=null && optionalProduct.getCreatedBy()!=null && optionalProduct.getCreatedBy().getId() != users.getId()){
+        if(users!=null && optionalProduct.getCreatedBy()!=null && optionalProduct.getCreatedBy().getId() == users.getId()){
 
             Product product = optionalProduct;
             product.setDiscountPrice(discountPrice);
@@ -202,7 +202,7 @@ public class ProductService {
         }
         Utility utility = new Utility();
         Users users = usersRepository.findByEmail(utility.getCurrentUsername()).orElse(null);
-        if(users!=null && optionalProduct.getCreatedBy()!=null && optionalProduct.getCreatedBy().getId() != users.getId()){
+        if(users!=null && optionalProduct.getCreatedBy()!=null && optionalProduct.getCreatedBy().getId() == users.getId()){
 
             optionalProduct.setQuantity(quantity);
             optionalProduct.setUpdatedAt(LocalDateTime.now());
@@ -225,7 +225,7 @@ public class ProductService {
         }
         Utility utility = new Utility();
         Users users = usersRepository.findByEmail(utility.getCurrentUsername()).orElse(null);
-        if(users!=null && optionalProduct.getCreatedBy()!=null && optionalProduct.getCreatedBy().getId() != users.getId()){
+        if(users!=null && optionalProduct.getCreatedBy()!=null && optionalProduct.getCreatedBy().getId() == users.getId()){
 
             optionalProduct.setStatus(status);
             optionalProduct.setUpdatedAt(LocalDateTime.now());

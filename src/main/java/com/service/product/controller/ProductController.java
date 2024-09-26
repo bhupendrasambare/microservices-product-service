@@ -51,7 +51,7 @@ public class ProductController {
 
     @Operation(summary = "Upload images to a product", description = "Uploads a list of images to the specified product.")
     @PostMapping("/{productId}/images")
-    public ResponseEntity<Response> uploadProductImages(@PathVariable Long productId, @RequestBody ProductUpdateImageDto imageUrls) {
+    public ResponseEntity<Response> uploadProductImages(@PathVariable Long productId, @ModelAttribute ProductUpdateImageDto imageUrls) {
         return productService.uploadProductImages(productId, imageUrls);
     }
 
