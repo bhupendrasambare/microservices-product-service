@@ -44,7 +44,7 @@ public class ProductAttributeService {
         }
         Utility utility = new Utility();
         Users users = usersRepository.findByEmail(utility.getCurrentUsername()).orElse(null);
-        if(users!=null && optionalProduct.getCreatedBy()!=null && optionalProduct.getCreatedBy().getId() != users.getId()){
+        if(users!=null && optionalProduct.getCreatedBy()!=null && optionalProduct.getCreatedBy().getId() == users.getId()){
             ProductAttribute productAttributes = new ProductAttribute();
             productAttributes.setProductId(optionalProduct.getId());
             productAttributes.setAttributeName(productAttributeRequest.name());
@@ -75,7 +75,7 @@ public class ProductAttributeService {
         ProductAttribute existingAttribute = existingAttributeOptional.get();
         Utility utility = new Utility();
         Users users = usersRepository.findByEmail(utility.getCurrentUsername()).orElse(null);
-        if(users!=null && existingAttribute.getCreatedBy()!=null && existingAttribute.getCreatedBy() != users.getId()){
+        if(users!=null && existingAttribute.getCreatedBy()!=null && existingAttribute.getCreatedBy() == users.getId()){
             if (productAttributeRequest.name() != null && !productAttributeRequest.name().isEmpty()) {
                 existingAttribute.setAttributeName(productAttributeRequest.name());
             }
@@ -101,7 +101,7 @@ public class ProductAttributeService {
         }
         Utility utility = new Utility();
         Users users = usersRepository.findByEmail(utility.getCurrentUsername()).orElse(null);
-        if(users!=null && existingAttributeOptional.getCreatedBy()!=null && existingAttributeOptional.getCreatedBy() != users.getId()){
+        if(users!=null && existingAttributeOptional.getCreatedBy()!=null && existingAttributeOptional.getCreatedBy() == users.getId()){
 
             productAttributesRepository.delete(existingAttributeOptional);
             return ResponseEntity.ok(new Response(Constants.PRODUCT_ATTRIBUTE_DELETED_SUCCESSFULLY));

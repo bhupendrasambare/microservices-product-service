@@ -23,4 +23,7 @@ public interface ProductRepository extends JpaRepository<Product,Long> {
             @Param("categoryId") Long categoryId,
             @Param("status") ProductStatus status
     );
+
+    @Query("Select p from Product p where p.createdBy.email LIKE :email")
+    List<Product> findByCreatedBy(@Param("email") String currentUsername);
 }
