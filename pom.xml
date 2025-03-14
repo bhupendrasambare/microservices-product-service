@@ -5,17 +5,18 @@
 	<parent>
 		<groupId>org.springframework.boot</groupId>
 		<artifactId>spring-boot-starter-parent</artifactId>
-		<version>3.1.9</version>
+		<version>3.2.0</version>
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>com.service.product</groupId>
 	<artifactId>product-service</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
+	<version>0.0.1</version>
 	<name>product-service</name>
-	<description>product service</description>
+	<description>Product service</description>
+
 	<properties>
-		<java.version>17</java.version>
-		<spring-cloud.version>2022.0.5</spring-cloud.version>
+		<java.version>21</java.version>
+		<spring-cloud.version>2023.0.0</spring-cloud.version>
 	</properties>
 	<dependencies>
 		<dependency>
@@ -128,7 +129,7 @@
 				<artifactId>spring-boot-maven-plugin</artifactId>
 				<configuration>
 					<image>
-						<name>bhupendra1404/microservice:auth</name>
+						<name>bhupendra1404/microservice:product-service</name>
 					</image>
 					<excludes>
 						<exclude>
